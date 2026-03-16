@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | E-AKTE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<header class="sub-hero">
+    <img src="Bilder/IMG_6493.JPG" class="bg">
+    <div class="overlay"></div>
+
+    <div class="hero-content small">
+        <h1 class="page-title">IMPRESSUM</h1>
+        <p class="slogan" style="margin-top:10px;">Angaben gemäß § 5 TMG</p>
+    </div>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/eakte.band?igsh=cmxIZTd5eHU3dXhm" target="_blank" class="social-icon">
+        <img src="Bilder/INSTA.png" alt="Instagram">
+    </a>
+
+    <!-- Hamburger -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Menü -->
+    <nav class="side-menu" id="side-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Über Uns</a>
+        <a href="live.html">Live</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+</header>
+
+<!-- IMPRESSUM CONTENT -->
+<section class="contact-section">
+    <div class="contact-container">
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+
+        <p>
+            E-AKTE GbR<br>
+            Elias Dude & Kyra Tauscher & Alexander Flechsig & Tristan Franz & Emil Jubelt<br>
+            Gollepark 3<br>
+            08548 Syrau<br>
+            Deutschland
+        </p>
+
+        <h2>Vertreten durch</h2>
+        <p>
+            Elias Dude
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 176 46654440<br>
+            E-Mail: <a href="mailto:eakte.band@gmail.com">eakte.band@gmail.com</a>
+        </p>
+
+        <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+        <p>
+            Elias Dude<br>
+            Anschrift wie oben
+        </p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
+            Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen
+            zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält evtl. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
+            bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <p class="band-name">© 2026 E-AKTE GbR.</p>
+            <p>Alle Rechte vorbehalten.</p>
+        </div>
+        <div class="footer-right">
+            <a href="kontakt.html" class="footer-link">Kontakt</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const sideMenu = document.getElementById('side-menu');
+
+hamburger.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+});
+
+// Auto-close beim Scrollen
+window.addEventListener('scroll', () => {
+    if(sideMenu.classList.contains('open')){
+        sideMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", function(){
+
+    if(window.scrollY > window.innerHeight){
+        scrollBtn.classList.add("show");
+    }else{
+        scrollBtn.classList.remove("show");
+    }
+
+});
+
+scrollBtn.addEventListener("click", function(){
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+});
+</script>
+
+<button id="scrollTopBtn">
+    <span class="arrow-up"></span>
+</button>
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0d0013;
+    color: white;
+    overflow-x: hidden;
+}
+
+.social-icon {
+    position: absolute;
+    top: 20px;     /* Abstand vom oberen Rand */
+    right: 20px;   /* Abstand vom rechten Rand */
+    z-index: 3;    /* über Hero-Content */
+    width: 40px;   /* Größe des Symbols */
+    height: 40px;
+    display: block;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.social-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Hover-Effekt */
+.social-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slogan {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 20px;        
+    font-family: 'Mistral', sans-serif;
+    letter-spacing: 1px;
+
+    opacity: 0;               /* unsichtbar starten */
+    transform: translateY(20px); /* leicht nach unten verschoben */
+    animation: fadeInUp 1.5s ease forwards;
+    animation-delay: 0.5s;    /* Verzögerung nach Logo */
+}
+
+/* Keyframes für fade-in + Slide-up */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bg {
+    position: fixed;  
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -2;   
+    transition: filter 0.1s linear;  /* weiche Übergänge */    
+}
+.overlay {
+    position: absolute;     /* liegt nur über das Hintergrundbild */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2); /* Ausgangsdunkelheit */
+    z-index: 0;             /* unter Logo & Slogan */
+    pointer-events: none;
+    transition: background 0.1s linear;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;             /* über Overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Hamburger Icon */
+.hamburger {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35px;    /* etwas breiter */
+    height: 25px;   /* etwas höher */
+    cursor: pointer;
+    z-index: 5;
+}
+
+.hamburger span {
+    display: block;
+    height: 5px;    /* dicker */
+    width: 100%;
+    border-radius: 3px; /* runde Enden */
+    background: linear-gradient(45deg, #5d00ff, #9c4eff); /* Lila-Blau Verlauf */
+    transition: all 0.4s ease;
+}
+/* Hover-Effekt */
+.hamburger:hover span {
+    transform: scaleX(1.2);
+    filter: brightness(1.2);
+}
+
+
+/* Responsive Anpassung */
+@media (max-width: 768px) {
+    .hamburger {
+        width: 30px;
+        height: 20px;
+    }
+
+    .hamburger span {
+        height: 4px;
+    }
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;         /* versteckt links */
+    width: 250px;
+    height: 100%;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 20px; /* Abstand vom oberen Rand */
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 4;
+}
+
+/* Side Menu Texte */
+.side-menu a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;                  /* groß und gut lesbar */
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+/* Hover Effekt */
+.side-menu a:hover {
+    color: #5d00ff;                     /* Lila passend zum Hamburger */
+    transform: scale(1.1);              /* leicht vergrößern */
+    text-shadow: 0 0 10px rgba(93,0,255,0.6);
+}
+
+/* Active state - geöffnet */
+.side-menu.open {
+    left: 0;
+}
+
+/* Animierte Öffnung */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+    background: linear-gradient(45deg, #ff6fcf, #5d00ff);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: linear-gradient(45deg, #ff6fcf, #5d00ff);
+}
+
+/* Hover-Effekt */
+.hamburger:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.logo {
+    position: relative;      /* war vorher absolute */
+    width: 90vw;
+    max-width: 900px;
+    margin-bottom: 30px;     /* Abstand zum Slogan */
+    transform: translateY(-10%); /* leicht nach oben */
+    z-index: 2;
+}
+
+
+/* Slide Effekt */
+@keyframes slideUp {
+    from {
+        background-position: center 80%;
+    }
+    to {
+        background-position: center 30%;
+    }
+}
+
+/* MENU SECTION */
+
+/* Menü-Section füllt Bildschirm */
+/* Menü-Section */
+.menu-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Container als Grid 2x2 */
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+}
+
+/* Buttons Desktop: rechteckig */
+.menu-button {
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s, color 0.3s, background 0.3s;
+}
+
+/* Overlay */
+.menu-button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+/* Text über Overlay */
+.menu-button {
+    position: relative;
+    z-index: 1;
+}
+
+/* Text im Button */
+.menu-button span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: white; /* Ausgangsfarbe */
+    z-index: 2;   /* sicherstellen, dass Text über Overlay liegt */
+}
+
+.menu-button:hover span {
+    font-size: 4.2rem;            /* Schrift deutlich größer */
+    color: black;  /* wichtig, überschreibt andere Regeln */
+    letter-spacing: 1px;
+}
+
+/* Hover */
+.menu-button:hover::before {
+    background: rgba(255,255,255,0.7);
+}
+/* Hover Effekt */
+.menu-button:hover {
+    transform: scale(1.05);       /* Feld leicht größer */
+}
+
+/* MEDIA QUERY: Mobile → quadratische Buttons */
+@media (max-width: 768px) {
+    .menu-container {
+        width: 100%;
+        height: auto;       /* Höhe passt sich an */
+    }
+
+    .menu-button {
+        aspect-ratio: 1 / 1;  /* Höhe = Breite */
+        font-size: 1.5rem;    /* kleinere Schrift für Mobile */
+        padding: 10px;        /* etwas weniger Padding */
+    }
+
+    .menu-button span {
+        font-size: 1.5rem;    /* Schrift im Button anpassen */
+    }
+
+    .menu-button:hover span {
+        font-size: 2rem;      /* etwas Vergrößerung beim Hover */
+    }
+}
+
+/* Footer Grundstil */
+.site-footer {
+    width: 100%;
+    padding: 20px 0;
+    letter-spacing: 2px;
+    background: #111;
+    display: flex;
+    justify-content: center;  /* Footer-Inhalt zentrieren */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;  /* links/rechts maximal auseinander */
+    align-items: center;
+    width: 50%;                     /* Container breiter = mehr Abstand */
+    max-width: 1200px;              /* optional für große Bildschirme */
+    flex-wrap: wrap;
+}
+
+.footer-left p {
+    margin: 0;
+}
+
+.band-name {
+    font-family: 'Mistral', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.footer-right {
+    margin-top: 5px;  /* für kleine Screens */
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #ccc;
+}
+
+
+
+
+
+
+/* CSS für Über uns */
+
+/* SUB HERO */
+.sub-hero {
+    height: 70vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.sub-hero .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-title {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: 4px;
+}
+
+/* ABOUT SECTION */
+.about-section {
+    padding: 60px 20px 60px 20px;
+    text-align: center;
+    background: #0d0013;
+    color: white;
+}
+
+.about-section h2 {
+    margin-bottom: 40px;
+}
+
+.about-section p {
+    margin-bottom: 40px; /* Abstand zwischen den Absätzen größer */
+}
+
+.about-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* MEMBERS */
+.members-section {
+    padding: 60px 10% 120px 10%;
+    background: #0d0013;
+}
+
+.member.reverse {
+    flex-direction: row-reverse;
+}
+
+.member img {
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Abstand zwischen Bandmitgliedern verkleinern */
+.member {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 70px; /* vorher 120px */
+}
+
+/* Name */
+.member-text h3 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    color: white;
+}
+
+/* Instrument */
+.member-text h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #bbb;
+    margin-bottom: 30px; /* MEHR Abstand zur Beschreibung */
+    text-transform: uppercase;
+}
+
+/* Beschreibung */
+.member-text p {
+    font-family: 'Orbitron', sans-serif;
+    color: #bbb;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+
+.member-text {
+    color: white;
+    max-width: 500px;
+}
+
+
+/* Fade Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(.17,.67,.83,.67);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .member {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .member img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+
+/* KONTAKT INFO */
+.contact-section {
+    padding: 100px 10%;
+    background: #0d0013;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 600px;
+    width: 100%;
+}
+
+.contact-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-container p {
+    margin-bottom: 20px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.contact-info p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.contact-info a:hover {
+    color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 0 20px;
+    }
+
+    .contact-container h2 {
+        font-size: 2rem;
+    }
+
+    .contact-info p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .site-footer {
+        padding: 10px 0;   /* vorher 20px → halb so hoch */
+    }
+
+    .footer-container {
+        width: 90%;        /* statt 50%, besser für Mobile */
+    }
+
+    .footer-left p,
+    .footer-link {
+        font-size: 0.8rem; /* kleinere Schrift */
+    }
+
+    .band-name {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* GALLERY SECTION */
+.gallery-section {
+    padding: 80px 10%;
+    background: #0d0013;
+    color: white;
+}
+
+.gallery-text {
+    text-align: center;
+    margin-bottom: 40px;  /* Abstand zwischen Text und Galerie */
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* Bilder */
+.gallery-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: block;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-img {
+    max-width: 85vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* LIGHTBOX ARROWS */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+}
+
+.arrow.left { left: 30px; }
+.arrow.right { right: 30px; }
+
+.arrow:hover {
+    opacity: 0.7;
+}
+
+/* Bildzähler */
+.image-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    background: rgba(0,0,0,0.5);
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+/* Mobile kleiner */
+@media (max-width: 768px) {
+    .arrow {
+        font-size: 2rem;
+    }
+}
+
+
+
+.live-section {
+    padding: 50px 5%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Abstand zwischen Überschrift, Text und Boxen */
+    align-items: center;
+    text-align: center;
+}
+
+.live-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.live-section p {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 40px;
+    max-width: 800px;
+}
+
+.live-container {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: auto;
+}
+
+.live-event {
+    background: rgba(25,30,70,0.9);
+    padding: 25px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    text-align: left;
+}
+
+.live-event:hover {
+    transform: translateY(-3px);
+    background: rgba(35,40,90,0.95);
+}
+
+.live-event h3 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.live-event p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #bbb;
+}
+
+/* Hinweistext wenn keine Termine geplant sind */
+.live-note {
+    text-align: center;       /* zentriert den Text */
+    font-size: 1.1rem;
+    color: #bbb;
+    max-width: 100%;          /* volle Breite erlauben */
+    margin: 0 auto 40px auto; /* Block zentriert und Abstand unten */
+    line-height: 1.6;         /* angenehmes Lesen */
+    word-break: normal;        /* keine Zwangszeilenumbrüche */
+}
+
+/* Versteckte Details */
+.live-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0;
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+}
+
+/* Wenn geöffnet */
+.live-event.active .live-details {
+    max-height: 300px;
+    padding-top: 10px;
+}
+
+
+/* WILLKOMMEN SECTION */
+
+.welcome-section{
+    padding: 100px 10%;
+    background: #12001a00;
+}
+
+.welcome-container{
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.welcome-image img{
+    width: 500px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.welcome-text{
+    max-width: 600px;
+}
+
+.welcome-text h2{
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.welcome-text p{
+    margin-bottom: 18px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.welcome-signature{
+    margin-top: 25px;
+    font-style: italic;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+
+    .welcome-container{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .welcome-image img{
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Scroll to Top Button */
+
+#scrollTopBtn{
+    position: fixed;
+    bottom: 40px;
+    right: -80px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg,#2b0a3a,#4b1f6e);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* sichtbar */
+#scrollTopBtn.show{
+    right: 30px;
+    opacity: 1;
+}
+
+/* Hover */
+#scrollTopBtn:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(140,80,255,0.6);
+}
+
+/* Pfeil */
+.arrow-up{
+    width: 12px;
+    height: 12px;
+    border-left: 3px solid white;
+    border-top: 3px solid white;
+    transform: rotate(45deg);
+    margin-top: 5px;
+}

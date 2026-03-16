@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie | E-AKTE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<header class="sub-hero">
+    <img src="Bilder/IMG_6484.JPG" class="bg">
+    <div class="overlay"></div>
+
+    <div class="hero-content small">
+        <h1 class="page-title">GALERIE</h1>
+        <p class="slogan" style="margin-top:10px;">Hier findest du Eindrücke unserer Band.</p>
+    </div>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/eakte.band?igsh=cmxIZTd5eHU3dXhm" target="_blank" class="social-icon">
+        <img src="Bilder/INSTA.png" alt="Instagram">
+    </a>
+
+    <!-- Hamburger -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Menü -->
+    <nav class="side-menu" id="side-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Über Uns</a>
+        <a href="live.html">Live</a>
+        <a href="contact.html">Kontakt</a>
+    </nav>
+</header>
+
+<!-- GALERIE SECTION -->
+<section class="gallery-section">
+    <div class="gallery-text">
+        <h2>Unsere Galerie</h2>
+        <p>Hier findest du Eindrücke unserer Auftritte, Proben und besonderen Momente. Klicke auf ein Bild, um es zu vergrößern.</p>
+    </div>
+
+    <div class="gallery-container" id="gallery-container">
+        <!-- Bilder werden per JS geladen -->
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+
+    <span class="arrow left" id="prev">&#10094;</span>
+
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Galerie Bild">
+
+    <span class="arrow right" id="next">&#10095;</span>
+
+    <div class="image-counter" id="image-counter"></div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <p class="band-name">© 2026 E-AKTE GbR.</p>
+            <p>Alle Rechte vorbehalten.</p>
+        </div>
+        <div class="footer-right">
+            <a href="impressum.html" class="footer-link">Impressum</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Hamburger Menü
+const hamburger = document.getElementById('hamburger');
+const sideMenu = document.getElementById('side-menu');
+
+hamburger.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+});
+
+window.addEventListener('scroll', () => {
+    if(sideMenu.classList.contains('open')){
+        sideMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+    }
+});
+
+// Fade-In Animation
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.3 };
+const appearOnScroll = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, appearOptions);
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+// Galerie laden
+const galleryContainer = document.getElementById('gallery-container');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.lightbox .close');
+
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const counter = document.getElementById('image-counter');
+
+const numImages = 67;
+const thumbFolder = 'Bilder/Bilder_Thumbs/';
+const fullFolder = 'Bilder/Bilder_Galerie/';
+
+let currentIndex = 0;
+
+/* Galerie laden */
+for (let i = 1; i <= numImages; i++) {
+
+    const img = document.createElement('img');
+
+    img.src = thumbFolder + i + ".jpg";
+    img.dataset.index = i;
+
+    img.classList.add('gallery-item');
+
+    img.addEventListener('click', () => {
+        openLightbox(i);
+    });
+
+    galleryContainer.appendChild(img);
+}
+
+/* Lightbox öffnen */
+function openLightbox(index){
+    currentIndex = index;
+
+    lightboxImg.src = fullFolder + index + ".jpg";
+
+    updateCounter();
+
+    lightbox.style.display = "flex";
+}
+
+/* Bild wechseln */
+function showImage(index){
+
+    if(index < 1) index = numImages;
+    if(index > numImages) index = 1;
+
+    currentIndex = index;
+
+    lightboxImg.src = fullFolder + index + ".jpg";
+
+    updateCounter();
+}
+
+/* Zähler */
+function updateCounter(){
+
+    let current = String(currentIndex).padStart(2,"0");
+    let total = String(numImages).padStart(2,"0");
+
+    counter.textContent = current + " / " + total;
+}
+
+/* Pfeile */
+nextBtn.addEventListener('click', () => {
+    showImage(currentIndex + 1);
+});
+
+prevBtn.addEventListener('click', () => {
+    showImage(currentIndex - 1);
+});
+
+/* Lightbox schließen */
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox){
+        lightbox.style.display = 'none';
+    }
+});
+
+/* Tastatur */
+document.addEventListener('keydown', (e)=>{
+
+    if(lightbox.style.display === "flex"){
+
+        if(e.key === "ArrowRight") showImage(currentIndex + 1);
+        if(e.key === "ArrowLeft") showImage(currentIndex - 1);
+        if(e.key === "Escape") lightbox.style.display = "none";
+    }
+
+});
+
+/* Swipe für Handy */
+let startX = 0;
+
+lightbox.addEventListener("touchstart",(e)=>{
+    startX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchend",(e)=>{
+
+    let endX = e.changedTouches[0].clientX;
+
+    if(endX < startX - 50){
+        showImage(currentIndex + 1);
+    }
+
+    if(endX > startX + 50){
+        showImage(currentIndex - 1);
+    }
+
+});
+document.addEventListener("DOMContentLoaded", function(){
+
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", function(){
+
+    if(window.scrollY > window.innerHeight){
+        scrollBtn.classList.add("show");
+    }else{
+        scrollBtn.classList.remove("show");
+    }
+
+});
+
+scrollBtn.addEventListener("click", function(){
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+});
+</script>
+
+<button id="scrollTopBtn">
+    <span class="arrow-up"></span>
+</button>
+
+</body>
+</html>

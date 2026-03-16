@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live | E-AKTE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<header class="sub-hero">
+    <img src="Bilder/IMG_6481.JPG" class="bg">
+    <div class="overlay"></div>
+
+    <div class="hero-content small">
+        <h1 class="page-title">LIVE</h1>
+        <p class="slogan" style="margin-top:10px;">Hier findest du unsere geplanten Auftritte!</p>
+    </div>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/eakte.band?igsh=cmxIZTd5eHU3dXhm" target="_blank" class="social-icon">
+        <img src="Bilder/INSTA.png" alt="Instagram">
+    </a>
+
+    <!-- Hamburger -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Menü -->
+    <nav class="side-menu" id="side-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Über Uns</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="contact.html">Kontakt</a>
+    </nav>
+</header>
+
+<!-- LIVE SECTION -->
+<section class="live-section">
+    <div class="live-container">
+        <h2>Unsere Auftritte</h2>
+        <p class="live-note">Derzeit sind keine Live-Auftritte geplant. Sobald Termine feststehen, findest du sie hier:</p>
+
+<div class="live-event">
+    <h3>Datum: –</h3>
+    <p>Ort: –</p>
+    <p>Uhrzeit: –</p>
+    <p>Link / Ticket: –</p>
+
+    <div class="live-details">
+        <p>Hier kannst du mehr Infos zu diesem Auftritt eintragen, z.B. Programm, Gäste, Hinweise.</p>
+    </div>
+</div>
+
+            <div class="live-event">
+    <h3>Datum: –</h3>
+    <p>Ort: –</p>
+    <p>Uhrzeit: –</p>
+    <p>Link / Ticket: –</p>
+
+    <div class="live-details">
+        <p>Hier kannst du mehr Infos zu diesem Auftritt eintragen, z.B. Programm, Gäste, Hinweise.</p>
+    </div>
+</div>
+
+            <div class="live-event">
+    <h3>Datum: –</h3>
+    <p>Ort: –</p>
+    <p>Uhrzeit: –</p>
+    <p>Link / Ticket: –</p>
+
+    <div class="live-details">
+        <p>Hier kannst du mehr Infos zu diesem Auftritt eintragen, z.B. Programm, Gäste, Hinweise.</p>
+    </div>
+</div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <p class="band-name">© 2026 E-AKTE GbR.</p>
+            <p>Alle Rechte vorbehalten.</p>
+        </div>
+        <div class="footer-right">
+            <a href="impressum.html" class="footer-link">Impressum</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Hamburger Menü
+const hamburger = document.getElementById('hamburger');
+const sideMenu = document.getElementById('side-menu');
+
+hamburger.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+});
+
+window.addEventListener('scroll', () => {
+    if(sideMenu.classList.contains('open')){
+        sideMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+    }
+});
+
+// Fade-In Animation
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.3 };
+const appearOnScroll = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, appearOptions);
+
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+document.addEventListener('DOMContentLoaded', () => {
+    const events = document.querySelectorAll('.live-event');
+
+    events.forEach(event => {
+        const details = event.querySelector('.live-details');
+        event.addEventListener('click', () => {
+            event.classList.toggle('active');
+        });
+    });
+});
+document.addEventListener("DOMContentLoaded", function(){
+
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", function(){
+
+    if(window.scrollY > window.innerHeight){
+        scrollBtn.classList.add("show");
+    }else{
+        scrollBtn.classList.remove("show");
+    }
+
+});
+
+scrollBtn.addEventListener("click", function(){
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+});
+</script>
+
+<button id="scrollTopBtn">
+    <span class="arrow-up"></span>
+</button>
+
+</body>
+</html>
