@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'MistralCustom';
+    src: url('fonts/Mistral.woff2') format('woff2'),
+         url('fonts/Mistral.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: #0d0013;
@@ -45,7 +53,7 @@ body {
     font-size: 2.5rem;
     text-align: center;
     margin-top: 20px;        
-    font-family: 'Mistral', sans-serif;
+    font-family: 'MistralCustom', cursive;
     letter-spacing: 1px;
 
     opacity: 0;               /* unsichtbar starten */
@@ -351,7 +359,7 @@ body {
 }
 
 .band-name {
-    font-family: 'Mistral', sans-serif;
+    font-family: 'MistralCustom', cursive;
     font-weight: bold;
     font-size: 1rem;
 }
