@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-AKTE</title>
+    <title>Deine Band</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -120,7 +120,7 @@ const bg = document.querySelector('.bg');
 
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    const maxScroll = 800;       // scroll-Bereich für maximale Verdunkelung
+    const maxScroll = 800;
     const minBrightness = 1;   // Ausgang hell
     const maxBrightness = 0.5;   // maximale Dunkelheit
     const newBrightness = Math.max(minBrightness - (scrollY / maxScroll) * (minBrightness - maxBrightness), maxBrightness);
