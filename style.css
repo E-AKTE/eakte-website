@@ -1,15 +1,15 @@
+@font-face {
+    font-family: 'MistralCustom';
+    src: url('fonts/mistral.woff2') format('woff2'),
+         url('fonts/Mistral.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-@font-face {
-    font-family: 'MistralCustom';
-    src: url('fonts/Mistral.woff2') format('woff2'),
-         url('fonts/Mistral.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 body {
